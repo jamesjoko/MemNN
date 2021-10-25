@@ -102,35 +102,6 @@ class ProductQuantizationKNN:
         indices = np.argpartition(distance_sums, nearest_neighbors)
         labels = self.train_labels[indices][:nearest_neighbors]
         return labels
-        '''unique_labels, counts = np.unique(labels, return_counts=True)
-        # 1) If there is only 1 label (among the nearest neighbors)
-        if len(unique_labels) == 1:
-            return unique_labels[0]
-        # 2) Else -> there are 2 or more labels (among the nearest neighbors)
-        # Get idxs from max to min number of counts
-        sorted_idxs = np.argsort(counts)[::-1]
-        # Sorted labels in descending order of their frequency
-        unique_labels = unique_labels[sorted_idxs]
-        # Sorted counts in descending order of their value
-        counts = counts[sorted_idxs]
-        # 2.1) If there is no tie
-        if counts[0] != counts[1]:
-            return unique_labels[0]
-        # 2.2) If there is an tie
-        max_count = counts[0]
-        idx = 0
-        min_distance = float('inf')
-        selected_label = None
-        # Select label with minimal summed distance amongst the labels with frequency == max_count
-        while idx < len(unique_labels) and counts[idx] == max_count:
-            label = unique_labels[idx]
-            label_indices = np.where(labels == label)
-            summed_distance = np.sum(distance_sums[indices[label_indices]])
-            if summed_distance < min_distance:
-                selected_label = label
-                min_distance = summed_distance
-            idx += 1
-        return selected_label'''
 
     def predict(self, test_data: np.ndarray, nearest_neighbors: int,
                 calc_dist: Callable[[np.ndarray, np.ndarray], np.ndarray] = squared_euclidean_dist) -> np.ndarray:
@@ -151,5 +122,4 @@ class ProductQuantizationKNN:
             preds = [self.predict_single_sample(
                 row, nearest_neighbors, calc_dist) for row in test_data]
         result = np.array(preds)
-        print(result.shape)
         return result

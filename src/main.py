@@ -36,12 +36,11 @@ if __name__ == '__main__':
     # Classify the test data using k-Nearest Neighbor search (with k = 10) on the compressed training
     preds = pqknn.predict(query, nearest_neighbors=100)
 
-    # print(sklearn.metrics.recall_score(
-    # list(groundtruth[0]), list(preds[0]), average='micro'))
+    # Calculate recall
     avg = []
-    for j in range(100):
-        avg.append(np.sum([1 for i in preds[j] if i in groundtruth[j]]))
-        #print(np.sum([1 for i in preds[j] if i in groundtruth[j]]))
-        '''print(sklearn.metrics.recall_score(
+    for j in range(query.shape[0]):
+        avg.append(
+            np.mean([1 if i in groundtruth[j] else 0 for i in preds[j]]))
+        '''avg.append(sklearn.metrics.recall_score(
             list(groundtruth[j]), list(preds[j]), average='micro'))'''
-    print(np.sum(avg)/100)
+    print(np.mean(avg))
