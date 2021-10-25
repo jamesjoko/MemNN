@@ -13,3 +13,4 @@ def fvecs_read(filename, c_contiguous=True):
     if c_contiguous:
         fv = fv.copy()
     return fv
+//https://gist.github.com/danoneata/49a807f47656fedbb389
