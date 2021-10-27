@@ -2,6 +2,7 @@
 import numpy as np
 from PQKNN import ProductQuantizationKNN
 import sklearn
+import time
 
 # read a .ivecs file into numpy array
 
@@ -28,19 +29,22 @@ if __name__ == '__main__':
 
     query = fvecs_read("siftsmall/siftsmall_query.fvecs")
 
-    # Create PQKNN object that partitions each train sample in 7 subvectors and encodes each subvector in 7 bits.
-    pqknn = ProductQuantizationKNN(n=7, c=7)
+    # Create PQKNN object that partitions each train sample in n subvectors and encodes each subvector in c bits.
+    # number of dimensions in dataset should be divisible by n (128 % n == 0); larger c -> higher accuracy
+    pqknn = ProductQuantizationKNN(n=8, c=11)
     # Perform the compression
     pqknn.compress(base, np.arange(0, base.shape[0]))
 
-    # Classify the test data using k-Nearest Neighbor search (with k = 10) on the compressed training
+    # Find k-Nearest Neighbor search (with k = 100) for test data with the compressed training
+    start = time.time()
     preds = pqknn.predict(query, nearest_neighbors=100)
+    end = time.time()
+    print('Predicting the', query.shape,
+          'query took', (end - start), 'seconds.')
 
-    # Calculate recall
+    # Calculate recall (non-index based)
     avg = []
     for j in range(query.shape[0]):
         avg.append(
             np.mean([1 if i in groundtruth[j] else 0 for i in preds[j]]))
-        '''avg.append(sklearn.metrics.recall_score(
-            list(groundtruth[j]), list(preds[j]), average='micro'))'''
     print(np.mean(avg))

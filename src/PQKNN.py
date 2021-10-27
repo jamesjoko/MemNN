@@ -67,6 +67,7 @@ class ProductQuantizationKNN:
                 self.compressed_data[:,
                                      partition_idx] = compressed_data_partition
                 self.subvector_centroids[partition_idx] = partition_centroids
+        #print(len(self.subvector_centroids), self.subvector_centroids[0].shape)
 
     def predict_single_sample(self, test_sample: np.ndarray, nearest_neighbors: int,
                               calc_dist: Callable[[np.ndarray, np.ndarray], np.ndarray] = squared_euclidean_dist):
