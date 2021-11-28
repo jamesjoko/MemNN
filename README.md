@@ -15,4 +15,6 @@ The data used contains 4 files:
 - learn.fvecs: vectors to find the parameters involved in a particular method (we will probably not use this)
 - query.fvecs: test set
 
-In the case of the 10k data, the sizes of these arrays are (10000, 128), (100, 100), (25000, 128), and (100, 128) respectively.
+For the 10k vectors data, the sizes of these arrays are (10000, 128), (100, 100), (25000, 128), and (100, 128) respectively.
+
+For the 1M vectors data, the sizes of these arrays are (1000000, 128), (10000, 100), (100000, 128), and (10000, 128) respectively.
