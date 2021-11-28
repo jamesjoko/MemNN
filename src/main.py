@@ -21,26 +21,26 @@ def fvecs_read(fname):
 
 if __name__ == '__main__':
     # print vector space of all files in the siftsmall dataset
-    base = fvecs_read("siftsmall/siftsmall_base.fvecs")
+    base = fvecs_read("sift/siftsmall_base.fvecs")
 
-    groundtruth = ivecs_read("siftsmall/siftsmall_groundtruth.ivecs")
+    groundtruth = ivecs_read("sift/sift_groundtruth.ivecs")
 
-    learn = fvecs_read("siftsmall/siftsmall_learn.fvecs")
+    learn = fvecs_read("sift/sift_learn.fvecs")
 
-    query = fvecs_read("siftsmall/siftsmall_query.fvecs")
+    query = fvecs_read("sift/sift_query.fvecs")
 
-    # Create PQKNN object that partitions each train sample in n subvectors and encodes each subvector in c bits.
+    # Create PQKNN object that partitions each train sample in n subvectors and encodes each subvector in 2^c bits.
     # number of dimensions in dataset should be divisible by n (128 % n == 0); larger c -> higher accuracy
     pqknn = ProductQuantizationKNN(n=8, c=11)
     # Perform the compression
     pqknn.compress(base, np.arange(0, base.shape[0]))
 
     # Find k-Nearest Neighbor search (with k = 100) for test data with the compressed training
-    start = time.time()
+    start_prediction = time.time()
     preds = pqknn.predict(query, nearest_neighbors=100)
-    end = time.time()
+    end_prediction = time.time()
     print('Predicting the', query.shape,
-          'query took', (end - start), 'seconds.')
+          'query took', (end_prediction - start_prediction), 'seconds.')
 
     # Calculate recall (non-index based)
     avg = []
