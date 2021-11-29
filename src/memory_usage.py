@@ -19,7 +19,7 @@ def fvecs_read(fname):
     return ivecs_read(fname).view('float32')
 
 
-fp = open('../memory_logs/memlog_n4_c12.log', 'w+')
+fp = open('../memory_logs/memlog_n32_c12.log', 'w+')
 
 
 @profile(stream=fp)
@@ -35,7 +35,7 @@ def main():
 
     # Create PQKNN object that partitions each train sample in n subvectors and encodes each subvector in 2^c bits.
     # number of dimensions in dataset should be divisible by n (128 % n == 0); larger c -> higher accuracy
-    pqknn = ProductQuantizationKNN(n=4, c=12)
+    pqknn = ProductQuantizationKNN(n=32, c=12)
     # Perform the compression
     pqknn.compress(base, np.arange(0, base.shape[0]))
 
