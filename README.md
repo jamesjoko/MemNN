@@ -18,3 +18,5 @@ The data used contains 4 files:
 For the 10k vectors data, the sizes of these arrays are (10000, 128), (100, 100), (25000, 128), and (100, 128) respectively.
 
 For the 1M vectors data, the sizes of these arrays are (1000000, 128), (10000, 100), (100000, 128), and (10000, 128) respectively.
+
+Memory Profiler: https://pypi.org/project/memory-profiler/
