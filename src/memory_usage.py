@@ -19,19 +19,19 @@ def fvecs_read(fname):
     return ivecs_read(fname).view('float32')
 
 
-fp = open('src/memory_profiler.log', 'w+')
+fp = open('memory_profiler.log', 'w+')
 
 
 @profile(stream=fp)
 def main():
     # print vector space of all files in the siftsmall dataset
-    base = fvecs_read("siftsmall/siftsmall_base.fvecs")
+    base = fvecs_read("../siftsmall/siftsmall_base.fvecs")
 
-    groundtruth = ivecs_read("siftsmall/siftsmall_groundtruth.ivecs")
+    groundtruth = ivecs_read("../siftsmall/siftsmall_groundtruth.ivecs")
 
-    learn = fvecs_read("siftsmall/siftsmall_learn.fvecs")
+    learn = fvecs_read("../siftsmall/siftsmall_learn.fvecs")
 
-    query = fvecs_read("siftsmall/siftsmall_query.fvecs")
+    query = fvecs_read("../siftsmall/siftsmall_query.fvecs")
 
     # Create PQKNN object that partitions each train sample in n subvectors and encodes each subvector in 2^c bits.
     # number of dimensions in dataset should be divisible by n (128 % n == 0); larger c -> higher accuracy
