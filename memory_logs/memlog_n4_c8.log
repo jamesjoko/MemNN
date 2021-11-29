@@ -1,0 +1,36 @@
+Filename: memory_usage.py
+
+Line #    Mem usage    Increment  Occurences   Line Contents
+============================================================
+    25     98.1 MiB     98.1 MiB           1   @profile(stream=fp)
+    26                                         def main():
+    27                                             # print vector space of all files in the siftsmall dataset
+    28    103.1 MiB      5.0 MiB           1       base = fvecs_read("../siftsmall/siftsmall_base.fvecs")
+    29                                         
+    30    103.1 MiB      0.0 MiB           1       groundtruth = ivecs_read("../siftsmall/siftsmall_groundtruth.ivecs")
+    31                                         
+    32    115.3 MiB     12.2 MiB           1       learn = fvecs_read("../siftsmall/siftsmall_learn.fvecs")
+    33                                         
+    34    115.3 MiB      0.0 MiB           1       query = fvecs_read("../siftsmall/siftsmall_query.fvecs")
+    35                                         
+    36                                             # Create PQKNN object that partitions each train sample in n subvectors and encodes each subvector in 2^c bits.
+    37                                             # number of dimensions in dataset should be divisible by n (128 % n == 0); larger c -> higher accuracy
+    38    115.3 MiB      0.0 MiB           1       pqknn = ProductQuantizationKNN(n=4, c=8)
+    39                                             # Perform the compression
+    40    120.0 MiB      4.7 MiB           1       pqknn.compress(base, np.arange(0, base.shape[0]))
+    41                                         
+    42                                             # Find k-Nearest Neighbor search (with k = 100) for test data with the compressed training
+    43    120.0 MiB      0.0 MiB           1       start_prediction = time.time()
+    44    127.7 MiB      7.7 MiB           1       preds = pqknn.predict(query, nearest_neighbors=100)
+    45    127.7 MiB      0.0 MiB           1       end_prediction = time.time()
+    46    127.7 MiB      0.0 MiB           1       print('Predicting the', query.shape,
+    47    127.7 MiB      0.0 MiB           1             'query took', (end_prediction - start_prediction), 'seconds.')
+    48                                         
+    49                                             # Calculate recall (non-index based)
+    50    127.7 MiB      0.0 MiB           1       avg = []
+    51    127.9 MiB      0.0 MiB         101       for j in range(query.shape[0]):
+    52    127.9 MiB      0.0 MiB         100           avg.append(
+    53    127.9 MiB      0.2 MiB       10300               np.mean([1 if i in groundtruth[j] else 0 for i in preds[j]]))
+    54    127.9 MiB      0.0 MiB           1       print(np.mean(avg))
+
+
