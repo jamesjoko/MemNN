@@ -2,6 +2,7 @@
 import numpy as np
 from PQKNN import ProductQuantizationKNN
 import time
+from memory_profiler import profile
 
 # read a .ivecs file into numpy array
 
@@ -18,7 +19,11 @@ def fvecs_read(fname):
     return ivecs_read(fname).view('float32')
 
 
-if __name__ == '__main__':
+fp = open('src/memory_profiler.log', 'w+')
+
+
+@profile(stream=fp)
+def main():
     # print vector space of all files in the siftsmall dataset
     base = fvecs_read("siftsmall/siftsmall_base.fvecs")
 
@@ -30,7 +35,7 @@ if __name__ == '__main__':
 
     # Create PQKNN object that partitions each train sample in n subvectors and encodes each subvector in 2^c bits.
     # number of dimensions in dataset should be divisible by n (128 % n == 0); larger c -> higher accuracy
-    pqknn = ProductQuantizationKNN(n=8, c=11)
+    pqknn = ProductQuantizationKNN(n=16, c=11)
     # Perform the compression
     pqknn.compress(base, np.arange(0, base.shape[0]))
 
@@ -47,3 +52,7 @@ if __name__ == '__main__':
         avg.append(
             np.mean([1 if i in groundtruth[j] else 0 for i in preds[j]]))
     print(np.mean(avg))
+
+
+if __name__ == '__main__':
+    main()
