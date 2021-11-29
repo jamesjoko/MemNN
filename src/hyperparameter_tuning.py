@@ -20,7 +20,7 @@ def fvecs_read(fname):
 
 if __name__ == '__main__':
     # print vector space of all files in the siftsmall dataset
-    small = True
+    small = False
     
     if small == True:
         base = fvecs_read("../siftsmall/siftsmall_base.fvecs")
@@ -39,7 +39,11 @@ if __name__ == '__main__':
     
     for n in [4, 8, 16]:
         for c in [8, 9, 10, 11]:
-            with open("hyperparameter_tuning_logs_sift.txt", "a") as log_file:
+            if small == True:
+                log_file_name = "hyperparameter_tuning_logs_siftsmall.txt"
+            else:
+                log_file_name = "hyperparameter_tuning_logs_sift.txt"
+            with open(log_file_name, "a") as log_file:
                 print(f'n = {n}, c = {c}')
                 log_file.write(f'n = {n}, c = {c}\n')
                 #Initialize

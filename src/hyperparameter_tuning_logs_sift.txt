@@ -12,3 +12,18 @@ n = 4, c = 10
 Compressing the base vectors took 2806.6176397800446 seconds.
 Predicting the (10000, 128) query took 205.06847858428955 seconds.
 recall = 0.319787
+
+n = 8, c = 8
+Compressing the base vectors took 3281.4392335414886 seconds.
+Predicting the (10000, 128) query took 291.2467908859253 seconds.
+recall = 0.429262
+
+n = 8, c = 9
+Compressing the base vectors took 7001.245261192322 seconds.
+Predicting the (10000, 128) query took 312.30026865005493 seconds.
+recall = 0.481804
+
+n = 16, c = 8
+Compressing the base vectors took 4428.426755666733 seconds.
+Predicting the (10000, 128) query took 542.3921639919281 seconds.
+recall = 0.6324519999999999
