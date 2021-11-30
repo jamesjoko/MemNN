@@ -19,7 +19,7 @@ def fvecs_read(fname):
 
 if __name__ == '__main__':
     # print vector space of all files in the siftsmall dataset
-    small = False
+    small = True
 
     if small == True:
         base = fvecs_read("../siftsmall/siftsmall_base.fvecs")
@@ -56,8 +56,7 @@ if __name__ == '__main__':
                       (end_compression - start_compression), 'seconds.')
                 log_file.write(
                     f'Compressing the base vectors took {end_compression - start_compression} seconds.\n')
-                log_file.write('Compressed data in bytes:',
-                               pqknn.compressed_data.nbytes)
+                log_file.write(f'Compressed data in bytes: {pqknn.compressed_data.nbytes}')
 
                 # Find k-Nearest Neighbor search (with k = 100 - depending on dataset) for test data with the compressed training
                 start_prediction = time.time()

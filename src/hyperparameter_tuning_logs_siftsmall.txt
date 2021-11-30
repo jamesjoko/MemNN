@@ -1,60 +1,80 @@
 n = 4, c = 8
-Compressing the base vectors took 1.728764533996582 seconds.
-Predicting the (100, 128) query took 0.07484650611877441 seconds.
+Compressing the base vectors took 1.3917968273162842 seconds.
+Compressed data in bytes: 40000Predicting the (100, 128) query took 0.08155584335327148 seconds.
 recall = 0.5830000000000001
 
 n = 4, c = 9
-Compressing the base vectors took 2.706256866455078 seconds.
-Predicting the (100, 128) query took 0.09206986427307129 seconds.
+Compressing the base vectors took 2.449519395828247 seconds.
+Compressed data in bytes: 80000Predicting the (100, 128) query took 0.08533048629760742 seconds.
 recall = 0.6293
 
 n = 4, c = 10
-Compressing the base vectors took 3.804755926132202 seconds.
-Predicting the (100, 128) query took 0.060751914978027344 seconds.
+Compressing the base vectors took 3.619410991668701 seconds.
+Compressed data in bytes: 80000Predicting the (100, 128) query took 0.06425738334655762 seconds.
 recall = 0.67
 
 n = 4, c = 11
-Compressing the base vectors took 6.362870931625366 seconds.
-Predicting the (100, 128) query took 0.17721796035766602 seconds.
+Compressing the base vectors took 7.529983282089233 seconds.
+Compressed data in bytes: 80000Predicting the (100, 128) query took 0.12477350234985352 seconds.
 recall = 0.7268000000000001
 
 n = 8, c = 8
-Compressing the base vectors took 4.800888299942017 seconds.
-Predicting the (100, 128) query took 0.10034012794494629 seconds.
+Compressing the base vectors took 4.108989000320435 seconds.
+Compressed data in bytes: 80000Predicting the (100, 128) query took 0.09727954864501953 seconds.
 recall = 0.7019999999999998
 
 n = 8, c = 9
-Compressing the base vectors took 7.409862041473389 seconds.
-Predicting the (100, 128) query took 0.11240029335021973 seconds.
+Compressing the base vectors took 6.948066234588623 seconds.
+Compressed data in bytes: 160000Predicting the (100, 128) query took 0.11967682838439941 seconds.
 recall = 0.7360000000000001
 
 n = 8, c = 10
-Compressing the base vectors took 10.94820785522461 seconds.
-Predicting the (100, 128) query took 0.14974713325500488 seconds.
+Compressing the base vectors took 12.04743242263794 seconds.
+Compressed data in bytes: 160000Predicting the (100, 128) query took 0.14842438697814941 seconds.
 recall = 0.7785
 
 n = 8, c = 11
-Compressing the base vectors took 20.799264192581177 seconds.
-Predicting the (100, 128) query took 0.18561720848083496 seconds.
+Compressing the base vectors took 23.495115280151367 seconds.
+Compressed data in bytes: 160000Predicting the (100, 128) query took 0.1282052993774414 seconds.
 recall = 0.8219
 
 n = 16, c = 8
-Compressing the base vectors took 8.235036611557007 seconds.
-Predicting the (100, 128) query took 0.12271285057067871 seconds.
+Compressing the base vectors took 7.199186563491821 seconds.
+Compressed data in bytes: 160000Predicting the (100, 128) query took 0.14861392974853516 seconds.
 recall = 0.805
 
 n = 16, c = 9
-Compressing the base vectors took 12.835609197616577 seconds.
-Predicting the (100, 128) query took 0.23946595191955566 seconds.
+Compressing the base vectors took 13.224458694458008 seconds.
+Compressed data in bytes: 320000Predicting the (100, 128) query took 0.16208362579345703 seconds.
 recall = 0.8441999999999998
 
 n = 16, c = 10
-Compressing the base vectors took 21.16501259803772 seconds.
-Predicting the (100, 128) query took 0.25698161125183105 seconds.
+Compressing the base vectors took 23.782624006271362 seconds.
+Compressed data in bytes: 320000Predicting the (100, 128) query took 0.14766955375671387 seconds.
 recall = 0.8721
 
 n = 16, c = 11
-Compressing the base vectors took 39.04716229438782 seconds.
-Predicting the (100, 128) query took 0.2637197971343994 seconds.
+Compressing the base vectors took 48.02011775970459 seconds.
+Compressed data in bytes: 320000Predicting the (100, 128) query took 0.24816679954528809 seconds.
 recall = 0.9016
+
+n = 32, c = 8
+Compressing the base vectors took 11.82178521156311 seconds.
+Compressed data in bytes: 320000Predicting the (100, 128) query took 0.248748779296875 seconds.
+recall = 0.8858999999999998
+
+n = 32, c = 9
+Compressing the base vectors took 21.030261516571045 seconds.
+Compressed data in bytes: 640000Predicting the (100, 128) query took 0.25200676918029785 seconds.
+recall = 0.9181
+
+n = 32, c = 10
+Compressing the base vectors took 39.31154227256775 seconds.
+Compressed data in bytes: 640000Predicting the (100, 128) query took 0.32372045516967773 seconds.
+recall = 0.9395000000000002
+
+n = 32, c = 11
+Compressing the base vectors took 86.85489583015442 seconds.
+Compressed data in bytes: 640000Predicting the (100, 128) query took 0.39881014823913574 seconds.
+recall = 0.9590999999999998
 
