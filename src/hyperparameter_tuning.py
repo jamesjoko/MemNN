@@ -1,7 +1,6 @@
 # reference: https://gist.github.com/danoneata/49a807f47656fedbb389
 import numpy as np
 from PQKNN import ProductQuantizationKNN
-import sklearn
 import time
 import pandas as pd
 
@@ -21,7 +20,7 @@ def fvecs_read(fname):
 if __name__ == '__main__':
     # print vector space of all files in the siftsmall dataset
     small = False
-    
+
     if small == True:
         base = fvecs_read("../siftsmall/siftsmall_base.fvecs")
         groundtruth = ivecs_read("../siftsmall/siftsmall_groundtruth.ivecs")
@@ -36,8 +35,8 @@ if __name__ == '__main__':
     # Create PQKNN object that partitions each train sample in n subvectors and c determines the amount of centroids for KMeans (2^c).
     # number of dimensions in dataset should be divisible by n (128 % n == 0); larger c -> higher accuracy
     metrics = []
-    
-    for n in [4, 8, 16]:
+
+    for n in [4, 8, 16, 32]:
         for c in [8, 9, 10, 11]:
             if small == True:
                 log_file_name = "hyperparameter_tuning_logs_siftsmall.txt"
@@ -46,15 +45,19 @@ if __name__ == '__main__':
             with open(log_file_name, "a") as log_file:
                 print(f'n = {n}, c = {c}')
                 log_file.write(f'n = {n}, c = {c}\n')
-                #Initialize
+                # Initialize
                 pqknn = ProductQuantizationKNN(n=n, c=c)
 
                 # Perform the compression
                 start_compression = time.time()
                 pqknn.compress(base, np.arange(0, base.shape[0]))
                 end_compression = time.time()
-                print('Compressing the base vectors took', (end_compression - start_compression), 'seconds.')
-                log_file.write(f'Compressing the base vectors took {end_compression - start_compression} seconds.\n')
+                print('Compressing the base vectors took',
+                      (end_compression - start_compression), 'seconds.')
+                log_file.write(
+                    f'Compressing the base vectors took {end_compression - start_compression} seconds.\n')
+                log_file.write('Compressed data in bytes:',
+                               pqknn.compressed_data.nbytes)
 
                 # Find k-Nearest Neighbor search (with k = 100 - depending on dataset) for test data with the compressed training
                 start_prediction = time.time()
@@ -62,7 +65,8 @@ if __name__ == '__main__':
                 end_prediction = time.time()
                 print('Predicting the', query.shape,
                       'query took', (end_prediction - start_prediction), 'seconds.')
-                log_file.write(f'Predicting the {query.shape} query took {end_prediction - start_prediction} seconds.\n')
+                log_file.write(
+                    f'Predicting the {query.shape} query took {end_prediction - start_prediction} seconds.\n')
 
                 # Calculate recall (non-index based)
                 avg = []
@@ -71,12 +75,12 @@ if __name__ == '__main__':
                         np.mean([1 if i in groundtruth[j] else 0 for i in preds[j]]))
                 print(f'recall = {np.mean(avg)}\n\n')
                 log_file.write(f'recall = {np.mean(avg)}\n\n')
-                metrics.append([n, c, end_compression - start_compression, end_prediction - start_prediction, np.mean(avg)])
+                metrics.append([n, c, end_compression - start_compression,
+                               end_prediction - start_prediction, pqknn.compressed_data.nbytes, np.mean(avg)])
             log_file.close()
-    metrics_df = pd.DataFrame(metrics, columns = ["n", "c", "compression_time", "prediction_time", "recall"])
+    metrics_df = pd.DataFrame(
+        metrics, columns=["n", "c", "compression_time", "prediction_time", "compression_bytes", "recall"])
     if small == True:
-        metrics_df.to_csv("df_metrics_siftsmall.csv", index = False)
+        metrics_df.to_csv("df_metrics_siftsmall.csv", index=False)
     else:
-        metrics_df.to_csv("df_metrics_sift.csv", index = False)
-        
-    
+        metrics_df.to_csv("df_metrics_sift.csv", index=False)
