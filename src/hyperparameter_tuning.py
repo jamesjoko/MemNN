@@ -3,6 +3,7 @@ import numpy as np
 from PQKNN import ProductQuantizationKNN
 import time
 import pandas as pd
+import sys
 
 
 # read a .ivecs file into numpy array
@@ -54,10 +55,9 @@ if __name__ == '__main__':
                 end_compression = time.time()
                 print('Compressing the base vectors took',
                       (end_compression - start_compression), 'seconds.')
-                log_file.write(
-                    f'Compressing the base vectors took {end_compression - start_compression} seconds.\n')
-                log_file.write(
-                    f'Compressed data shape: {pqknn.compressed_data.shape}')
+                log_file.write(f'Compressing the base vectors took {end_compression - start_compression} seconds.\n')
+                log_file.write(f'Compressed data bytes: {sys.getsizeof(pqknn.compressed_data)}')
+                log_file.write(f'Subvector centroids bytes: {sys.getsizeof(pqknn.subvector_centroids)}')
 
                 # Find k-Nearest Neighbor search (with k = 100 - depending on dataset) for test data with the compressed training
                 start_prediction = time.time()
@@ -76,10 +76,10 @@ if __name__ == '__main__':
                 print(f'recall = {np.mean(avg)}\n\n')
                 log_file.write(f'recall = {np.mean(avg)}\n\n')
                 metrics.append([n, c, end_compression - start_compression,
-                               end_prediction - start_prediction, pqknn.compressed_data.shape, np.mean(avg)])
+                               end_prediction - start_prediction, sys.getsizeof(pqknn.compressed_data), sys.getsizeof(pqknn.subvector_centroids), np.mean(avg)])
             log_file.close()
     metrics_df = pd.DataFrame(
-        metrics, columns=["n", "c", "compression_time", "prediction_time", "compression_bytes", "recall"])
+        metrics, columns=["n", "c", "compression_time", "prediction_time", "compression_bytes", "subvector_centroids_bytes", "recall"])
     if small == True:
         metrics_df.to_csv("df_metrics_siftsmall.csv", index=False)
     else:
