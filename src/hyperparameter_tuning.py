@@ -56,7 +56,8 @@ if __name__ == '__main__':
                       (end_compression - start_compression), 'seconds.')
                 log_file.write(
                     f'Compressing the base vectors took {end_compression - start_compression} seconds.\n')
-                log_file.write(f'Compressed data in bytes: {pqknn.compressed_data.nbytes}')
+                log_file.write(
+                    f'Compressed data shape: {pqknn.compressed_data.shape}')
 
                 # Find k-Nearest Neighbor search (with k = 100 - depending on dataset) for test data with the compressed training
                 start_prediction = time.time()
@@ -75,7 +76,7 @@ if __name__ == '__main__':
                 print(f'recall = {np.mean(avg)}\n\n')
                 log_file.write(f'recall = {np.mean(avg)}\n\n')
                 metrics.append([n, c, end_compression - start_compression,
-                               end_prediction - start_prediction, pqknn.compressed_data.nbytes, np.mean(avg)])
+                               end_prediction - start_prediction, pqknn.compressed_data.shape, np.mean(avg)])
             log_file.close()
     metrics_df = pd.DataFrame(
         metrics, columns=["n", "c", "compression_time", "prediction_time", "compression_bytes", "recall"])
