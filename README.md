@@ -23,4 +23,4 @@ For the 1M vectors data, the sizes of these arrays are (1000000, 128), (10000, 1
 
 Link to download [sift_base](https://drive.google.com/file/d/1Hm0IUfnZhXwmdyFq0o28135WFuNBbPpB/view?usp=sharing) file (place in sift folder)
 
-Memory Profiler: https://pypi.org/project/memory-profiler/
+Memory is calculated by adding the nbytes attribute of the numpy arrays of the PQKNN object (compressed_data and subvector_centroids)
