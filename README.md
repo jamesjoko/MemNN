@@ -25,4 +25,4 @@ Link to download [sift_base](https://drive.google.com/file/d/1Hm0IUfnZhXwmdyFq0o
 
 Memory is calculated by adding the nbytes attribute of the numpy arrays of the PQKNN object (compressed_data and subvector_centroids)
 
-To collect metric data, run `python src/hyperparameter_tuning.py`. Logs will be found at `src/hyperparameter_tuning_logs_sift.txt` or `src/hyperparameter_tuning_logs_siftsmall.txt`. csv dataframes will be found at `src/df_metrics.csv` or `src/df_metrics_siftsmall`.
+To collect metric data, run `python src/hyperparameter_tuning.py`. Logs will be found at `src/hyperparameter_tuning_logs_sift.txt` or `src/hyperparameter_tuning_logs_siftsmall.txt`. csv dataframes will be found at `src/df_metrics.csv` or `src/df_metrics_siftsmall.csv`.
