@@ -24,3 +24,5 @@ For the 1M vectors data, the sizes of these arrays are (1000000, 128), (10000, 1
 Link to download [sift_base](https://drive.google.com/file/d/1Hm0IUfnZhXwmdyFq0o28135WFuNBbPpB/view?usp=sharing) file (place in sift folder)
 
 Memory is calculated by adding the nbytes attribute of the numpy arrays of the PQKNN object (compressed_data and subvector_centroids)
+
+To collect metric data, run `python src/hyperparameter_tuning.py`. Logs will be found at `src/hyperparameter_tuning_logs_sift.txt` or `src/hyperparameter_tuning_logs_siftsmall.txt`. csv dataframes will be found at `src/df_metrics.csv` or `src/df_metrics_siftsmall.csv`.
